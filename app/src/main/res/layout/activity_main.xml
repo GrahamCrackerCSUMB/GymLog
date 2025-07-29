@@ -16,8 +16,7 @@
         android:id="@+id/logDisplayTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent
-" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/exerciseLabelTextView"
@@ -101,5 +100,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/repInputEditText"
+        android:id="@+id/logButton"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
