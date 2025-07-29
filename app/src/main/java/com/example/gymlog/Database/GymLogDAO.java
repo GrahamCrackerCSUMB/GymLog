@@ -7,13 +7,13 @@ import androidx.room.Query;
 
 import com.example.gymlog.Database.entities.GymLog;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Dao
 public interface GymLogDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert (GymLog gymLog);
 
-    @Query("Select * from " + GymLogDatabase.gymLogTable)
-    List<GymLog> getAllRecords();
+    @Query("Select * from " + GymLogDatabase.GYM_LOG_TABLE)
+    ArrayList<GymLog> getAllRecords();
 }
