@@ -1,4 +1,4 @@
-package com.example.gymlog.Database;
+package com.example.gymlog.database;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,19 +7,23 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.gymlog.Database.entities.GymLog;
+import com.example.gymlog.database.entities.GymLog;
 import com.example.gymlog.MainActivity;
+import com.example.gymlog.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {GymLog.class}, version = 1, exportSchema = false)
 public abstract class GymLogDatabase extends RoomDatabase {
 
 
-    private static final String DATABASE_NAME = "Gy,Log_database";
+    private static final String DATABASE_NAME = "GymLog_database";
 
     public static final String GYM_LOG_TABLE = "gymLogTable";
 
@@ -27,7 +31,7 @@ public abstract class GymLogDatabase extends RoomDatabase {
 
     private static final int NUMBER_OF_THREADS = 4;
 
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     static GymLogDatabase getDatabase(final Context context){
         if(INSTANCE == null){
