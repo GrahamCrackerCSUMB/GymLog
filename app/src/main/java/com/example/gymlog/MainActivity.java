@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     double mWeight = 0.0;
     int mReps = 0;
 
+    //TODO : Ad login information
+    int loggedInUserId = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +55,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.exerciseInputEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                upDateDisplay();
+            }
+        });
+
     }
 
     private void insertGymLogRecord(){
         if (mExercise.isEmpty()){
             return;
         }
-        GymLog log = new GymLog(mExercise, mWeight, mReps);
+        GymLog log = new GymLog(mExercise, mWeight, mReps,loggedInUserId);
         repository.insertGymLog(log);
     }
 
