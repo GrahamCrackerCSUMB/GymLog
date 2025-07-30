@@ -45,18 +45,12 @@ public class LoginActivity extends AppCompatActivity {
             toastMaker("username should not be blank");
             return;
         }
-
         LiveData<User> userObserver = repository.getUserByUserName(username);
-
         userObserver.observe(this, user -> {
             if (user != null) {
                 String password = binding.passwordLoginEditText.getText().toString();
-                if (password.equals(user.getPassword())) {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(MainActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-                    sharedPrefEditor.putInt(MainActivity.SHARED_PREFERENCE_USERID_KEY, user.getId());
-                    sharedPrefEditor.apply();
-                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+              if(password.equals(user.getPassword())){
+                  startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
                 } else {
                     toastMaker("Invalid password");
                     binding.passwordLoginEditText.setSelection(0);
@@ -65,9 +59,9 @@ public class LoginActivity extends AppCompatActivity {
                 toastMaker(String.format("%s is not a valid username", username));
                 binding.userNameLoginEditText.setSelection(0);
             }
-
         });
     }
+
         private void toastMaker (String message){
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
